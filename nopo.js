@@ -1,5 +1,5 @@
 (function($) {
-	$.fn.noPo = function(tag,url) { //pass the tag in
+	$.fn.noPo = function(tag,url,useData) { //pass the tag in
 		var tagPage = false;
 		if (url === "") {
 			url = "tagged";
@@ -16,7 +16,15 @@
 				noPoSelector = $('.nopo');
 			}
 			noPoSelector.siblings(tag).each(function() { //remove tags from each sibiligin in the tag
-				$(this).remove();
+				if (useData === true) {
+			        	$(this).siblings().each(function() {
+			                	if ($(this).data(dataAttr).indexOf(tag) > -1) {
+			                    		$(this).remove();
+			                	}
+			            	})
+			        } else {
+			        	$(this).remove();
+			        }
 			})
 		}
 		return this; //return ourself bc we want to be able to chain our function :')
