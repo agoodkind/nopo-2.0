@@ -1,7 +1,10 @@
 (function($) {
-	$.fn.noPo = function(tag) { //pass the tag in
+	$.fn.noPo = function(tag,url) { //pass the tag in
 		var tagPage = false;
-		if (window.location.pathname.split("/")[1] == 'tagged') { //check if we are in the tag page
+		if url === "" {
+			url = "tagged";
+		}
+		if (window.location.pathname.split("/")[1] == url) { //check if we are in the tag page,needs to be a string
 			tagPage = true;
 		}
 		if (tagPage === false) { //if we arent in the tag page continue with execution
