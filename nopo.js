@@ -1,9 +1,6 @@
 (function($) {
-	$.fn.noPo = function(tag,url,useData) { //pass the tag in
+	$.fn.noPo = function(tag,useData,url) { //pass the tag in
 		var tagPage = false;
-		if (url === "") {
-			url = "tagged";
-		}
 		if (window.location.pathname.split("/")[1] == url) { //check if we are in the tag page,needs to be a string
 			tagPage = true;
 		}
@@ -17,19 +14,14 @@
 			}
 			noPoSelector.siblings(tag).each(function() { //remove tags from each sibiligin in the tag
 				if (useData === true) {
-			        	$(this).siblings().each(function() {
-			                	if ($(this).data(dataAttr).indexOf(tag) > -1) {
-			                    		$(this).remove();
-			                	}
-			            	})
+			                if ($(this).data(dataAttr).indexOf(tag) > -1) {
+			                  	$(this).toggle();
+			                }
 			        } else {
-			        	$(this).remove();
+			        	$(this).toggle();
 			        }
 			})
 		}
 		return this; //return ourself bc we want to be able to chain our function :')
 	}
-	$(function() {
-		$().noPo(); //run nopo for the first time after dom loads
-	});
 })(jQuery);
